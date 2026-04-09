@@ -7,6 +7,7 @@ import ConfirmationModal from '../components/ConfirmationModal';
 import { cn } from '../utils/utils';
 import { analyzeImage, isModelsLoading, isModelsLoaded } from '../utils/analysis';
 import JSZip from 'jszip';
+import { Filter, Heart, Trash2, Sliders, ShieldAlert, Download, RefreshCw, Camera } from 'lucide-react';
 import { db } from '../utils/db';
 
 function DetectorPage() {
@@ -284,91 +285,245 @@ function DetectorPage() {
     return () => clearInterval(interval);
   }, []);
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 1024);
+
+  // Handle auto-collapse on smaller screens
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setIsSidebarOpen(false);
+      } else {
+        setIsSidebarOpen(true);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <div className="flex flex-col h-screen bg-[#fafaf9] text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900 overflow-hidden">
-      {/* Top Navigation */}
-      <nav className="z-50 flex items-center justify-between px-8 py-4 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div className="flex items-center gap-8">
-          <div className="h-10 group cursor-pointer" onClick={() => window.location.href = '/'}>
-            <img
-              src="/logo.png"
-              alt="Id'a Logo"
-              className="h-full object-contain mix-blend-multiply transition-transform group-hover:scale-105"
-            />
+    <div className="flex h-screen bg-[#fafaf9] text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900 overflow-hidden relative">
+      <Sidebar
+        isCollapsed={!isSidebarOpen}
+        onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+      />
+
+      <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+        {/* Top Navigation */}
+        <nav className="z-40 flex items-center justify-between px-8 py-4 bg-white border-b border-slate-200 shrink-0">
+          <div className="flex items-center gap-8">
+            <h2 className="text-xl font-black italic tracking-tighter text-slate-900">Detector <span className="text-blue-600">Workplace</span></h2>
           </div>
-          <div className="hidden md:flex items-center gap-1">
-            <button className="px-4 py-2 text-sm font-bold text-slate-400 hover:text-slate-900 transition-colors" onClick={() => window.location.href = '/'}>Home</button>
-            <button className="px-4 py-2 text-sm font-bold text-slate-900 bg-slate-100 rounded-xl">Detector</button>
-            <button className="px-4 py-2 text-sm font-bold text-slate-400 hover:text-slate-900 transition-colors">People</button>
+
+          <div className={cn(
+            "flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-widest transition-all duration-500",
+            modelStatus.loaded ? "bg-emerald-50 text-emerald-600 border border-emerald-100" :
+              modelStatus.loading ? "bg-blue-50 text-blue-600 border border-blue-100 animate-pulse" :
+                "bg-slate-50 text-slate-400 border border-slate-100"
+          )}>
+            <div className={cn("w-2 h-2 rounded-full", modelStatus.loaded ? "bg-emerald-500" : modelStatus.loading ? "bg-blue-500 animate-ping" : "bg-slate-300")} />
+            {modelStatus.loaded ? "AI Engine Ready" : modelStatus.loading ? "Waking up AI..." : "AI Engine Standby"}
+          </div>
+        </nav>
+
+        {/* Stats Board */}
+        <div className="z-30 bg-white border-b border-slate-100 px-12 py-8 shrink-0">
+          <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="group bg-[#f8fafc] p-6 rounded-[2rem] border border-slate-100 shadow-sm transition-all hover:shadow-md hover:bg-white active:scale-95 cursor-default">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-slate-900 text-white flex items-center justify-center shadow-lg">
+                  <Camera size={24} />
+                </div>
+                <div>
+                  <div className="text-3xl font-black tracking-tight text-slate-900">{stats.total}</div>
+                  <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">Total Photos</div>
+                </div>
+              </div>
+            </div>
+            <div className="group bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm transition-all hover:shadow-md hover:bg-white active:scale-95 cursor-default">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-sm border border-emerald-100 transition-colors group-hover:bg-emerald-500 group-hover:text-white">
+                  <Heart size={24} />
+                </div>
+                <div>
+                  <div className="text-3xl font-black tracking-tight text-emerald-600">{stats.sharp}</div>
+                  <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">Sharp Shots</div>
+                </div>
+              </div>
+            </div>
+            <div className="group bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm transition-all hover:shadow-md hover:bg-white active:scale-95 cursor-default">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center shadow-sm border border-red-100 transition-colors group-hover:bg-red-500 group-hover:text-white">
+                  <ShieldAlert size={24} />
+                </div>
+                <div>
+                  <div className="text-3xl font-black tracking-tight text-red-600">{stats.blurry}</div>
+                  <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">Blurry Found</div>
+                </div>
+              </div>
+            </div>
+            <div className="group bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm transition-all hover:shadow-md hover:bg-white active:scale-95 cursor-default">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center shadow-sm border border-pink-100 transition-colors group-hover:bg-pink-500 group-hover:text-white">
+                  <Heart size={24} fill="currentColor" />
+                </div>
+                <div>
+                  <div className="text-3xl font-black tracking-tight text-pink-600">{stats.smiling}</div>
+                  <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">Happy Faces</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className={cn(
-          "flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-widest transition-all duration-500",
-          modelStatus.loaded ? "bg-emerald-50 text-emerald-600 border border-emerald-100" :
-            modelStatus.loading ? "bg-blue-50 text-blue-600 border border-blue-100 animate-pulse" :
-              "bg-slate-50 text-slate-400 border border-slate-100"
-        )}>
-          <div className={cn("w-2 h-2 rounded-full", modelStatus.loaded ? "bg-emerald-500" : modelStatus.loading ? "bg-blue-500 animate-ping" : "bg-slate-300")} />
-          {modelStatus.loaded ? "AI Engine Ready" : modelStatus.loading ? "Waking up AI..." : "AI Engine Standby"}
-        </div>
-      </nav>
-
-      {/* Stats Bar */}
-      <div className="z-40 bg-white/50 border-b border-slate-100 px-8 py-3 overflow-x-auto no-scrollbar">
-        <div className="max-w-7xl mx-auto flex items-center gap-8">
-          <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-2xl border border-slate-100 shadow-sm min-w-[140px]">
-            <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 font-black text-xs">{stats.total}</div>
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total</div>
-          </div>
-          <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-2xl border border-slate-100 shadow-sm min-w-[140px]">
-            <div className="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-600 font-black text-xs">{stats.sharp}</div>
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Sharp</div>
-          </div>
-          <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-2xl border border-slate-100 shadow-sm min-w-[140px]">
-            <div className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center text-red-600 font-black text-xs">{stats.blurry}</div>
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Blurry</div>
-          </div>
-          <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-2xl border border-slate-100 shadow-sm min-w-[140px]">
-            <div className="w-8 h-8 rounded-lg bg-pink-100 flex items-center justify-center text-pink-600 font-black text-xs">{stats.smiling}</div>
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Smiling</div>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-1 overflow-hidden">
-        <Sidebar
-          filters={filters}
-          setFilters={setFilters}
-          thresholds={thresholds}
-          setThresholds={setThresholds}
-          stats={stats}
-          modelStatus={modelStatus}
-          onProcess={handleProcess}
-          isProcessing={isProcessing}
-          isExporting={isExporting}
-          onClear={handleClear}
-          onExport={handleExport}
-          filteredCount={filteredImages.length}
-        />
 
         <main className="flex-1 overflow-y-auto scroll-smooth bg-[#fafaf9]">
           <div className="max-w-7xl mx-auto p-12 space-y-12">
-            {/* Header Section */}
-            <div className="space-y-4">
-              <h1 className="text-4xl font-black tracking-tighter text-slate-900">
-                Photo Intelligence <span className="text-blue-600 italic">Workplace</span>
-              </h1>
-              <p className="text-lg text-slate-500 max-w-2xl leading-relaxed font-medium">
-                Curation as a craft. A project by <span className="text-yellow-600 font-bold uppercase tracking-[0.2em] text-[10px]">Aiita Lyslay Osoa & Oguzu Stephen</span>.
-              </p>
-            </div>
 
-            {/* Upload Section */}
-            <section className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-xs font-black text-slate-300 uppercase tracking-[0.3em]">Upload Queue</h3>
-                <div className="flex gap-4">
+            {/* Control Panel Section */}
+            <section className="bg-white border border-slate-200 rounded-[2.5rem] p-8 shadow-xl shadow-slate-200/50 space-y-8">
+              <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-center justify-between border-b border-slate-100 pb-8">
+                <div className="space-y-1">
+                  <h3 className="text-sm font-black uppercase tracking-widest text-slate-400">Processing Tools</h3>
+                  <p className="text-xs font-bold text-slate-500">Fine-tune your selection with AI-driven analysis</p>
+                </div>
+
+                <div className="flex flex-wrap gap-4">
+                  <button
+                    onClick={handleProcess}
+                    disabled={isProcessing || stats.total === 0}
+                    className="flex items-center gap-3 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-200 text-white px-8 py-4 rounded-2xl font-black text-sm transition-all shadow-xl shadow-slate-200 active:scale-95"
+                  >
+                    {isProcessing ? <RefreshCw className="animate-spin w-5 h-5" /> : <Filter className="text-blue-400 w-5 h-5" />}
+                    {isProcessing ? "Analyzing..." : "Run AI Analysis"}
+                  </button>
+
+                  <div className="flex bg-slate-100 p-1.5 rounded-[1.25rem]">
+                    {[
+                      { id: 'all', label: 'All', icon: Filter },
+                      { id: 'perfect', label: 'Perfect', icon: Heart },
+                      { id: 'rejects', label: 'Rejects', icon: Trash2 },
+                    ].map((mode) => (
+                      <button
+                        key={mode.id}
+                        onClick={() => setFilters({ ...filters, viewMode: mode.id })}
+                        className={cn(
+                          "flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-black transition-all",
+                          filters.viewMode === mode.id
+                            ? "bg-white text-slate-900 shadow-md"
+                            : "text-slate-400 hover:text-slate-600"
+                        )}
+                      >
+                        <mode.icon className={cn("w-4 h-4", filters.viewMode === mode.id ? "text-blue-500" : "")} />
+                        {mode.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                {/* AI Thresholds */}
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Sliders className="w-4 h-4 text-blue-500" />
+                    <h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">AI Thresholds</h4>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-[10px] font-black text-slate-600 uppercase">Blur Sensitivity</span>
+                        <span className="text-[10px] font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded">{thresholds.blur}</span>
+                      </div>
+                      <input
+                        type="range" min="0" max="100" value={thresholds.blur}
+                        onChange={(e) => setThresholds({ ...thresholds, blur: parseInt(e.target.value) })}
+                        className="w-full h-1 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                      />
+                    </div>
+
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-[10px] font-black text-slate-600 uppercase">Smile Confidence</span>
+                        <span className="text-[10px] font-black text-pink-600 bg-pink-50 px-2 py-0.5 rounded">{Math.round(thresholds.smile * 100)}%</span>
+                      </div>
+                      <input
+                        type="range" min="0" max="100" value={thresholds.smile * 100}
+                        onChange={(e) => setThresholds({ ...thresholds, smile: parseInt(e.target.value) / 100 })}
+                        className="w-full h-1 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-pink-600"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Manual Refinement */}
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Filter className="w-4 h-4 text-emerald-500" />
+                    <h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Manual Refinement</h4>
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="flex items-center group cursor-pointer bg-slate-50 px-5 py-4 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all">
+                      <input
+                        type="checkbox" checked={filters.hideBlurry}
+                        onChange={(e) => setFilters({ ...filters, hideBlurry: e.target.checked })}
+                        className="w-4 h-4 rounded-md border-slate-300 text-blue-600"
+                      />
+                      <span className="ml-4 text-xs font-black text-slate-600 group-hover:text-slate-900 transition-colors flex items-center gap-2">
+                        <ShieldAlert size={16} className="text-red-500" />
+                        Exclude Blurry Photos
+                      </span>
+                    </label>
+                    <label className="flex items-center group cursor-pointer bg-slate-50 px-5 py-4 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all">
+                      <input
+                        type="checkbox" checked={filters.onlySmiling}
+                        onChange={(e) => setFilters({ ...filters, onlySmiling: e.target.checked })}
+                        className="w-4 h-4 rounded-md border-slate-300 text-pink-600"
+                      />
+                      <span className="ml-4 text-xs font-black text-slate-600 group-hover:text-slate-900 transition-colors flex items-center gap-2">
+                        <Heart size={16} className="text-pink-500" />
+                        Focus on Smiling Only
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                {/* Batch Actions */}
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Download className="w-4 h-4 text-slate-900" />
+                    <h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Library Actions</h4>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-3">
+                    <button
+                      onClick={handleExport}
+                      disabled={filteredImages.length === 0 || isExporting}
+                      className="flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-black text-xs transition-all shadow-xl shadow-blue-100 active:scale-95"
+                    >
+                      {isExporting ? <RefreshCw className="animate-spin" size={16} /> : <Download size={16} />}
+                      {isExporting ? "Preparing ZIP..." : `Export ${filteredImages.length} Photos`}
+                    </button>
+                    <button
+                      onClick={handleClear}
+                      className="flex items-center justify-center gap-3 bg-white hover:bg-red-50 text-slate-400 hover:text-red-500 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest border border-slate-100 transition-all active:scale-95"
+                    >
+                      <Trash2 size={14} />
+                      Clear Library
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Upload Section - Streamlined */}
+            <section className="bg-slate-100/50 border-2 border-dashed border-slate-200 rounded-[2rem] p-8 transition-all hover:bg-slate-100 hover:border-slate-300">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div className="space-y-1 text-center md:text-left">
+                  <h3 className="text-lg font-black tracking-tight text-slate-900">Upload Workspace</h3>
+                  <p className="text-xs font-bold text-slate-400">Drop your session photos here to start AI analysis</p>
+                </div>
+                <div className="flex items-center gap-4">
                   <button
                     onClick={() => {
                       onImagesSelected([
@@ -377,28 +532,33 @@ function DetectorPage() {
                         { id: 'test-3', name: 'Blurry.jpg', preview: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&blur=50&q=80', status: 'pending' }
                       ]);
                     }}
-                    className="text-[10px] font-black uppercase tracking-widest bg-white border border-slate-200 hover:bg-slate-50 text-slate-600 px-4 py-2 rounded-xl transition-all shadow-sm"
+                    className="text-[10px] font-black uppercase tracking-widest bg-white text-slate-600 px-6 py-3 rounded-xl border border-slate-200 transition-all shadow-sm hover:shadow-md"
                   >
-                    Load Samples
+                    Gallery Samples
                   </button>
-                  <div className="text-[10px] font-black uppercase tracking-widest text-blue-600 bg-blue-50 px-4 py-2 rounded-xl border border-blue-100 flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
-                    {images.length} photos ready
+                  <div className="h-24 w-px bg-slate-200 hidden md:block" />
+                  <div className="scale-75 origin-right">
+                    <ImageDropzone onImagesSelected={onImagesSelected} />
                   </div>
                 </div>
               </div>
-              <ImageDropzone onImagesSelected={onImagesSelected} />
             </section>
 
             {/* Gallery Section */}
-            <section className="space-y-4 pb-20">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-                <h3 className="text-xs font-black text-slate-300 uppercase tracking-[0.3em]">
-                  {filteredImages.length === images.length ? "Full Collection" : "Refined Selection"}
-                </h3>
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                  Showing {filteredImages.length} of {images.length}
-                </span>
+            <section className="space-y-8 pb-32">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-6">
+                <div className="flex items-center gap-4">
+                  <h3 className="text-xl font-black italic tracking-tighter text-slate-900">
+                    {filteredImages.length === images.length ? "Collection" : "Filtered Matches"}
+                  </h3>
+                  <span className="text-[10px] font-black text-white bg-slate-900 px-3 py-1 rounded-full uppercase tracking-widest">
+                    {filteredImages.length}
+                  </span>
+                </div>
+                <div className="hidden md:flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Secure On-Device Processing</span>
+                </div>
               </div>
               <ImageGallery
                 images={filteredImages}
