@@ -29,7 +29,32 @@ const Sidebar = ({ filters, setFilters, stats, onProcess, isProcessing, onClear 
 
       <div className="p-6 space-y-8 flex-1">
         <div className="space-y-4">
-          <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest">Global Filters</h3>
+          <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest">View Mode</h3>
+          <div className="flex flex-col gap-2">
+            {[
+              { id: 'all', label: 'All Photos', icon: Filter, color: 'text-slate-600' },
+              { id: 'perfect', label: 'Perfect Shots', icon: Heart, color: 'text-emerald-600' },
+              { id: 'rejects', label: 'Rejects', icon: Trash2, color: 'text-red-600' },
+            ].map((mode) => (
+              <button
+                key={mode.id}
+                onClick={() => setFilters({ ...filters, viewMode: mode.id })}
+                className={cn(
+                  "flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
+                  filters.viewMode === mode.id
+                    ? "bg-slate-900 text-white shadow-lg shadow-slate-200 scale-[1.02]"
+                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                )}
+              >
+                <mode.icon size={18} className={filters.viewMode === mode.id ? "text-white" : mode.color} />
+                {mode.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest">Manual Toggles</h3>
           <div className="space-y-3">
             <label className="flex items-center group cursor-pointer">
               <input
