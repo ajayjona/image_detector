@@ -1,7 +1,11 @@
 import * as faceapi from '@vladmandic/face-api';
 
 let modelsLoaded = false;
+let modelsLoading = false;
 let modelsLoadingPromise = null;
+
+export const isModelsLoading = () => modelsLoading;
+export const isModelsLoaded = () => modelsLoaded;
 
 export const loadModels = async () => {
   if (modelsLoaded) return;
@@ -11,6 +15,7 @@ export const loadModels = async () => {
 
   const MODEL_URL = '/models';
 
+  modelsLoading = true;
   modelsLoadingPromise = (async () => {
     try {
       await Promise.all([
@@ -19,9 +24,11 @@ export const loadModels = async () => {
         faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL, 'face_expression_model-weights_manifest.json'),
       ]);
       modelsLoaded = true;
+      modelsLoading = false;
       console.log('[Face-API] High-accuracy models loaded successfully');
     } catch (err) {
       console.error('[Face-API] Error loading models:', err);
+      modelsLoading = false;
       modelsLoadingPromise = null;
       throw err;
     }
@@ -90,9 +97,10 @@ export const calculateBlurScore = (canvas) => {
 /**
  * Analyzes an image for blur and smiles.
  * @param {string} imageSrc 
+ * @param {object} thresholds { blur: number, smile: number }
  * @returns {Promise<{blurScore: number, smileScore: number, isBlurry: boolean, isSmiling: boolean}>}
  */
-export const analyzeImage = async (imageSrc) => {
+export const analyzeImage = async (imageSrc, thresholds = { blur: 40, smile: 0.7 }) => {
   console.log(`[Analysis] Starting high-accuracy analysis for: ${imageSrc.substring(0, 50)}...`);
 
   await loadModels();
@@ -127,8 +135,7 @@ export const analyzeImage = async (imageSrc) => {
 
         // 2. Calculate Blur Score
         const blurScore = calculateBlurScore(cropCanvas);
-        const BLUR_THRESHOLD = 40;
-        const isBlurry = blurScore < BLUR_THRESHOLD;
+        const isBlurry = blurScore < thresholds.blur;
 
         // 3. Detect Faces
         console.log('[Analysis] Running Face Detection (SSD Mobilenet)...');
@@ -142,7 +149,7 @@ export const analyzeImage = async (imageSrc) => {
 
         if (detections && detections.length > 0) {
           smileScore = detections.reduce((acc, det) => acc + det.expressions.happy, 0) / detections.length;
-          isSmiling = smileScore > 0.7;
+          isSmiling = smileScore > thresholds.smile;
           console.log(`[Analysis] Found ${detections.length} face(s). Smile Score: ${(smileScore * 100).toFixed(2)}%`);
         } else {
           console.warn('[Analysis] No faces detected.');

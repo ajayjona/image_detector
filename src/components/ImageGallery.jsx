@@ -1,49 +1,69 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X, ShieldAlert, ImageIcon } from 'lucide-react';
+import { Check, X, ShieldAlert, ImageIcon, Heart, Download } from 'lucide-react';
 import { cn } from '../utils/utils';
 
-const ImageCard = ({ image, onRemove }) => {
-  const isPerfect = image.status === 'completed' && !image.isBlurry && image.isSmiling;
-  const isReject = image.status === 'completed' && (image.isBlurry || !image.isSmiling);
+const ImageCard = ({ image, onRemove, onDownload, onImageClick, thresholds }) => {
+  const isBlurry = image.status === 'completed' ? image.blurScore < thresholds.blur : null;
+  const isSmiling = image.status === 'completed' ? image.smileScore >= thresholds.smile : null;
+  const isPerfect = image.status === 'completed' && !isBlurry && isSmiling;
+  const isReject = image.status === 'completed' && (isBlurry || !isSmiling);
 
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, scale: 0.95 }}
+      initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className={cn(
-        "group relative bg-white rounded-xl shadow-sm border transition-all duration-300 overflow-hidden",
-        isPerfect ? "border-emerald-200 shadow-emerald-100 shadow-lg" : "border-slate-200",
-        isReject ? "opacity-75 grayscale-[0.5]" : ""
+        "group relative bg-white/80 backdrop-blur-md rounded-2xl shadow-sm border transition-all duration-300 overflow-hidden",
+        isPerfect ? "border-emerald-200 shadow-emerald-100 shadow-xl ring-1 ring-emerald-500/20" : "border-slate-200",
+        isReject ? "opacity-90 grayscale-[0.2]" : ""
       )}
     >
-      <div className="aspect-[4/3] relative bg-slate-100 overflow-hidden">
+      <div
+        className="aspect-[4/3] relative bg-slate-100 overflow-hidden cursor-pointer"
+        onClick={() => onImageClick(image.id)}
+      >
         <img
           src={image.preview}
           alt={image.name}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        
+
         <button
           onClick={() => onRemove(image.id)}
           className="absolute top-2 right-2 p-1.5 bg-black/40 hover:bg-black/60 text-white rounded-full transition-colors backdrop-blur-sm opacity-0 group-hover:opacity-100 z-10"
+          title="Remove photo"
         >
           <X size={14} />
         </button>
 
+        <button
+          onClick={() => onDownload(image)}
+          className="absolute top-2 right-10 p-1.5 bg-blue-600/80 hover:bg-blue-600 text-white rounded-full transition-colors backdrop-blur-sm opacity-0 group-hover:opacity-100 z-10"
+          title="Download original"
+        >
+          <Download size={14} />
+        </button>
+
         {/* Status Overlays */}
         {image.status === 'completed' && (
-          <div className="absolute top-2 left-2 flex gap-1 z-10">
+          <div className="absolute top-2 left-2 flex gap-1.5 z-10">
             {isPerfect && (
-              <div className="bg-emerald-500 text-white p-1 rounded-full shadow-lg">
-                <Check size={14} strokeWidth={3} />
+              <div className="bg-emerald-500 text-white p-1.5 rounded-full shadow-lg shadow-emerald-500/40">
+                <Check size={14} strokeWidth={4} />
               </div>
             )}
-            {isReject && (
-              <div className="bg-red-500 text-white p-1 rounded-full shadow-lg">
-                <X size={14} strokeWidth={3} />
+            {!isPerfect && isSmiling && (
+              <div className="bg-pink-500 text-white p-1.5 rounded-full shadow-lg shadow-pink-500/40">
+                <Heart size={14} fill="currentColor" />
+              </div>
+            )}
+            {isBlurry && (
+              <div className="bg-amber-500 text-white p-1.5 rounded-full shadow-lg shadow-amber-500/40">
+                <ShieldAlert size={14} strokeWidth={3} />
               </div>
             )}
           </div>
@@ -67,29 +87,28 @@ const ImageCard = ({ image, onRemove }) => {
         </div>
 
         {image.status === 'error' || image.analysisError ? (
-          <p className="text-[10px] text-red-500 font-medium">
+          <p className="text-[10px] text-red-500 font-bold bg-red-50 p-1.5 rounded-lg border border-red-100 italic">
             {image.analysisError || "Analysis failed"}
           </p>
         ) : (
           <div className="flex flex-wrap gap-1.5">
-            {image.isBlurry !== null && (
-              <div className={cn(
-                "px-1.5 py-0.5 rounded text-[10px] font-semibold flex items-center gap-0.5",
-                image.isBlurry ? "bg-red-50 text-red-600" : "bg-emerald-50 text-emerald-600"
-              )}>
-                {image.isBlurry ? <ShieldAlert size={10} /> : <Check size={10} />}
-                {image.isBlurry ? "Blurry" : "Sharp"}
-                <span className="opacity-50 font-normal ml-0.5">{Math.round(image.blurScore || 0)}</span>
-              </div>
-            )}
-            {image.isSmiling !== null && (
-              <div className={cn(
-                "px-1.5 py-0.5 rounded text-[10px] font-semibold flex items-center gap-0.5",
-                image.isSmiling ? "bg-emerald-50 text-emerald-600" : "bg-amber-50 text-amber-600"
-              )}>
-                {image.isSmiling ? "Smiling" : "No Smile"}
-                <span className="opacity-50 font-normal ml-0.5">{Math.round((image.smileScore || 0) * 100)}%</span>
-              </div>
+            {image.status === 'completed' && (
+              <>
+                <div className={cn(
+                  "px-2 py-1 rounded-lg text-[10px] font-black flex items-center gap-1 transition-colors",
+                  isBlurry ? "bg-red-50 text-red-600 border border-red-100" : "bg-emerald-50 text-emerald-600 border border-emerald-100"
+                )}>
+                  {isBlurry ? "Blurry" : "Sharp"}
+                  <span className="opacity-50 font-black ml-0.5">{Math.round(image.blurScore || 0)}</span>
+                </div>
+                <div className={cn(
+                  "px-2 py-1 rounded-lg text-[10px] font-black flex items-center gap-1 transition-colors",
+                  isSmiling ? "bg-pink-50 text-pink-600 border border-pink-100" : "bg-slate-50 text-slate-400 border border-slate-100"
+                )}>
+                  {isSmiling ? "Smiling" : "Neutral"}
+                  <span className="opacity-50 font-black ml-0.5">{Math.round((image.smileScore || 0) * 100)}%</span>
+                </div>
+              </>
             )}
           </div>
         )}
@@ -98,21 +117,33 @@ const ImageCard = ({ image, onRemove }) => {
   );
 };
 
-const ImageGallery = ({ images, onRemove }) => {
+const ImageGallery = ({ images, onRemove, onDownload, onImageClick, thresholds }) => {
   if (images.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 text-slate-400">
-        <ImageIcon size={48} strokeWidth={1} className="mb-4 opacity-20" />
-        <p className="text-sm">No photos uploaded yet</p>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex flex-col items-center justify-center py-32 text-slate-300"
+      >
+        <ImageIcon size={64} strokeWidth={1} className="mb-6 opacity-40 animate-pulse text-blue-200" />
+        <p className="text-lg font-medium text-slate-400">Your library is empty</p>
+        <p className="text-sm text-slate-300 mt-2">Upload some photos to get started</p>
+      </motion.div>
     );
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
       <AnimatePresence mode="popLayout">
         {images.map((image) => (
-          <ImageCard key={image.id} image={image} onRemove={onRemove} />
+          <ImageCard
+            key={image.id}
+            image={image}
+            onRemove={onRemove}
+            onDownload={onDownload}
+            onImageClick={onImageClick}
+            thresholds={thresholds}
+          />
         ))}
       </AnimatePresence>
     </div>
