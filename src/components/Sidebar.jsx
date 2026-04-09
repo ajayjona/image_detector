@@ -1,5 +1,5 @@
 import React from 'react';
-import { Filter, Trash2, ShieldAlert, Heart, RefreshCw, Sliders, Cpu, Download } from 'lucide-react';
+import { Filter, Trash2, ShieldAlert, Heart, RefreshCw, Sliders, Cpu, Download, Camera } from 'lucide-react';
 import { cn } from '../utils/utils';
 
 const Sidebar = ({
@@ -21,12 +21,8 @@ const Sidebar = ({
       <div className="p-6 border-b border-slate-100 flex flex-col gap-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="bg-slate-900 p-2 rounded-lg shadow-lg shadow-slate-200">
-              <Camera size={20} className="text-white" />
-            </div>
-            <div className="flex flex-col -space-y-1">
-              <h1 className="font-black text-2xl tracking-tighter text-slate-900 uppercase leading-none">Id'a</h1>
-              <span className="text-[8px] font-black uppercase tracking-widest text-blue-600 pl-0.5 whitespace-nowrap">by Osoa Lesley</span>
+            <div className="h-10 overflow-hidden">
+              <img src="/logo.png" alt="Logo" className="h-full object-contain mix-blend-multiply" />
             </div>
           </div>
 

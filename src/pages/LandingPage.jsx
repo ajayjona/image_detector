@@ -14,13 +14,13 @@ const LandingPage = () => {
 
             {/* Nav */}
             <nav className="relative z-50 flex items-center justify-between px-8 py-8 max-w-7xl mx-auto">
-                <div className="flex items-center gap-3">
-                    <div className="p-2.5 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl shadow-xl shadow-blue-500/20">
-                        <Camera className="text-white" size={24} />
-                    </div>
-                    <div className="flex flex-col -space-y-1">
-                        <span className="text-2xl font-black tracking-tighter uppercase leading-none">Id'a</span>
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500/80 pl-0.5">by Osoa Lesley</span>
+                <div className="flex items-center gap-4">
+                    <div className="h-24 overflow-hidden group">
+                        <img
+                            src="/logo.png"
+                            alt="Id'a Logo"
+                            className="h-full object-contain mix-blend-screen brightness-150 group-hover:brightness-200 transition-all duration-500 scale-125 origin-left"
+                        />
                     </div>
                 </div>
                 <Link
@@ -44,15 +44,18 @@ const LandingPage = () => {
                                 <Sparkles size={14} />
                                 Next-Gen Photo Intelligence
                             </span>
-                            <h1 className="text-7xl font-black tracking-tight leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/50">
-                                The Art of <br />
-                                Selection. <br />
-                                <span className="text-blue-500 tracking-tighter italic">Id'a.</span>
+                            <h1 className="flex flex-col gap-4">
+                                <span className="text-sm font-black tracking-[0.3em] text-yellow-500 uppercase">The Art of Selection</span>
+                                <img
+                                    src="/logo.png"
+                                    alt="Id'a"
+                                    className="h-32 w-fit object-contain mix-blend-screen brightness-125"
+                                />
                             </h1>
                             <p className="text-xl text-white/40 font-medium max-w-lg leading-relaxed pt-2">
                                 "As a photographer, the hardest part isn't taking the shot—it's finding it."
                                 <br />
-                                <span className="text-white/80 text-sm font-black uppercase tracking-widest mt-2 block">— By Osoa Lesley</span>
+                                <span className="text-white/80 text-sm font-black uppercase tracking-widest mt-2 block">— By Aiita Lyslay Osoa</span>
                             </p>
                         </motion.div>
 
@@ -137,6 +140,32 @@ const LandingPage = () => {
                 </div>
             </main>
 
+            {/* The Story Section */}
+            <section className="relative z-10 py-32 px-8 bg-black/20">
+                <div className="max-w-4xl mx-auto space-y-12">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 rounded-full text-yellow-400 text-[10px] font-black uppercase tracking-[0.3em]">
+                        The Story
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-16 items-start">
+                        <h2 className="text-5xl font-black leading-tight tracking-tighter">
+                            Meet <span className="text-yellow-400 italic">Id'a</span>.
+                        </h2>
+                        <div className="space-y-6 text-white/50 font-medium leading-relaxed">
+                            <p>
+                                In the <span className="text-white">Lugbara</span> language, the word for picture is simple and beautiful: <span className="text-yellow-400 font-bold italic">Id'a</span>.
+                            </p>
+                            <p>
+                                This project started with a simple question from <span className="text-white">Aiita Lyslay Osoa</span> and <span className="text-white">Oguzu Stephen</span>:
+                                <span className="italic"> "How can we make curation feel less like a chore and more like a craft?"</span>
+                            </p>
+                            <p>
+                                Built as a labor of love for the photography community, <span className="text-white">Id'a</span> is designed to be fast, fun, and completely private. Because your art belongs to you—and only you.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Features */}
             <section className="relative z-10 bg-white/5 border-t border-white/5 py-32 px-8">
                 <div className="max-w-7xl mx-auto space-y-20">
@@ -168,10 +197,10 @@ const LandingPage = () => {
             {/* Footer */}
             <footer className="relative z-10 py-16 px-8 border-t border-white/5 text-center space-y-4">
                 <div className="text-white/20 text-xs font-black uppercase tracking-widest">
-                    &copy; 2024 ID'A • Curated by Osoa Lesley
+                    &copy; 2024 ID'A • A project by Aiita Lyslay Osoa & Oguzu Stephen
                 </div>
                 <p className="text-white/10 text-[10px] font-bold italic max-w-md mx-auto">
-                    "Id'a" is the Lugbara word for picture. This tool is designed for photographers who value both their art and their privacy.
+                    Designed for photographers who value both their art and their privacy.
                 </p>
             </footer>
         </div>

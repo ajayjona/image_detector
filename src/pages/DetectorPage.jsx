@@ -308,11 +308,11 @@ function DetectorPage() {
             <div className="absolute -top-24 -left-20 w-64 h-64 bg-blue-200/20 blur-3xl rounded-full" />
             <div className="absolute -top-10 right-0 w-80 h-80 bg-purple-200/20 blur-3xl rounded-full" />
 
-            <h2 className="text-5xl font-black tracking-tighter text-slate-900 bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 uppercase">
-              Id'a <span className="text-2xl align-top text-blue-600">by Osoa Lesley</span>
-            </h2>
-            <p className="text-xl text-slate-500 max-w-2xl leading-relaxed italic">
-              "Precision curation for those who live behind the lens."
+            <div className="h-28 overflow-hidden mb-6">
+              <img src="/logo.png" alt="Id'a" className="h-full object-contain mix-blend-multiply" />
+            </div>
+            <p className="text-xl text-slate-500 max-w-2xl leading-relaxed">
+              A project by <span className="text-yellow-600 font-bold uppercase tracking-widest text-xs">Aiita Lyslay Osoa & Oguzu Stephen</span>. Precision for those who live behind the lens.
             </p>
           </div>
 
