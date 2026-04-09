@@ -21,10 +21,13 @@ const Sidebar = ({
       <div className="p-6 border-b border-slate-100 flex flex-col gap-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="bg-blue-600 p-2 rounded-lg shadow-lg shadow-blue-200">
-              <Filter size={20} className="text-white" />
+            <div className="bg-slate-900 p-2 rounded-lg shadow-lg shadow-slate-200">
+              <Camera size={20} className="text-white" />
             </div>
-            <h1 className="font-black text-xl tracking-tight text-slate-900">PhotoFilter</h1>
+            <div className="flex flex-col -space-y-1">
+              <h1 className="font-black text-2xl tracking-tighter text-slate-900 uppercase leading-none">Id'a</h1>
+              <span className="text-[8px] font-black uppercase tracking-widest text-blue-600 pl-0.5 whitespace-nowrap">by Osoa Lesley</span>
+            </div>
           </div>
 
           <div className={cn(
