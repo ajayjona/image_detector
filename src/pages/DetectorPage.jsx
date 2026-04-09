@@ -422,10 +422,14 @@ function DetectorPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                 {/* AI Thresholds */}
-                <div className="space-y-6">
+                <div className="space-y-6 group/tip relative">
                   <div className="flex items-center gap-2 mb-2">
                     <Sliders className="w-4 h-4 text-blue-500" />
                     <h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">AI Thresholds</h4>
+                    <div className="absolute -top-12 left-0 w-64 p-3 bg-slate-900 text-white rounded-xl text-[10px] font-bold leading-relaxed shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover/tip:opacity-100 group-hover/tip:translate-y-0 transition-all z-50">
+                      Adjust sensitivity levels for automated blur and expression detection.
+                      <div className="absolute bottom-[-4px] left-4 w-2 h-2 bg-slate-900 rotate-45" />
+                    </div>
                   </div>
 
                   <div className="space-y-4">
@@ -456,10 +460,14 @@ function DetectorPage() {
                 </div>
 
                 {/* Manual Refinement */}
-                <div className="space-y-6">
+                <div className="space-y-6 group/tip relative">
                   <div className="flex items-center gap-2 mb-2">
                     <Filter className="w-4 h-4 text-emerald-500" />
                     <h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Manual Refinement</h4>
+                    <div className="absolute -top-12 left-0 w-64 p-3 bg-slate-900 text-white rounded-xl text-[10px] font-bold leading-relaxed shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover/tip:opacity-100 group-hover/tip:translate-y-0 transition-all z-50">
+                      Apply custom filters to show or hide images based on specific AI traits.
+                      <div className="absolute bottom-[-4px] left-4 w-2 h-2 bg-slate-900 rotate-45" />
+                    </div>
                   </div>
 
                   <div className="space-y-3">
@@ -489,10 +497,14 @@ function DetectorPage() {
                 </div>
 
                 {/* Batch Actions */}
-                <div className="space-y-6">
+                <div className="space-y-6 group/tip relative">
                   <div className="flex items-center gap-2 mb-2">
                     <Download className="w-4 h-4 text-slate-900" />
                     <h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Library Actions</h4>
+                    <div className="absolute -top-12 left-0 w-64 p-3 bg-slate-900 text-white rounded-xl text-[10px] font-bold leading-relaxed shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover/tip:opacity-100 group-hover/tip:translate-y-0 transition-all z-50">
+                      Manage your curated collection with batch export and library maintenance tools.
+                      <div className="absolute bottom-[-4px] left-4 w-2 h-2 bg-slate-900 rotate-45" />
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-1 gap-3">

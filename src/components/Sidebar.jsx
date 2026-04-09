@@ -62,17 +62,32 @@ const Sidebar = ({
         </nav>
       </div>
 
-      <div className="mt-auto p-6">
+      <div className={cn("mt-auto p-4 flex flex-col gap-3", isCollapsed && "items-center")}>
         <div className={cn(
-          "bg-slate-50 rounded-2xl p-4 border border-slate-100",
-          isCollapsed && "p-2 items-center"
+          "bg-slate-50 rounded-2xl p-3 border border-slate-100 w-full",
+          isCollapsed && "p-1.5"
         )}>
           <div className={cn("flex items-center gap-3", isCollapsed && "flex-col")}>
-            <div className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center text-[10px] font-black text-white shadow-sm ring-2 ring-white">AL</div>
+            <div className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center text-[10px] font-black text-white shadow-sm ring-2 ring-white shrink-0">AL</div>
             {!isCollapsed && (
-              <div className="flex flex-col">
-                <span className="text-[10px] font-black text-slate-900 uppercase">Aiita Lyslay</span>
-                <span className="text-[9px] font-bold text-slate-400">Founder</span>
+              <div className="flex flex-col min-w-0">
+                <span className="text-[10px] font-black text-slate-900 uppercase truncate">Aiita Lyslay</span>
+                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">Member</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className={cn(
+          "bg-slate-50 rounded-2xl p-3 border border-slate-100 w-full",
+          isCollapsed && "p-1.5"
+        )}>
+          <div className={cn("flex items-center gap-3", isCollapsed && "flex-col")}>
+            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-[10px] font-black text-white shadow-sm ring-2 ring-white shrink-0">OS</div>
+            {!isCollapsed && (
+              <div className="flex flex-col min-w-0">
+                <span className="text-[10px] font-black text-slate-900 uppercase truncate">Oguzu Stephen</span>
+                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">Member</span>
               </div>
             )}
           </div>
