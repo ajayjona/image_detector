@@ -328,9 +328,9 @@ function DetectorPage() {
         {/* Stats Board */}
         <div className="z-30 bg-white border-b border-slate-100 px-12 py-8 shrink-0">
           <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="group bg-[#f8fafc] p-6 rounded-[2rem] border border-slate-100 shadow-sm transition-all hover:shadow-md hover:bg-white active:scale-95 cursor-default">
+            <div className="group bg-yellow-50/30 p-6 rounded-[2rem] border border-yellow-500/10 shadow-sm transition-all hover:shadow-md hover:bg-white active:scale-95 cursor-default">
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-slate-900 text-white flex items-center justify-center shadow-lg">
+                <div className="w-14 h-14 rounded-2xl bg-yellow-500 text-slate-950 flex items-center justify-center shadow-lg">
                   <Camera size={24} />
                 </div>
                 <div>
@@ -339,7 +339,7 @@ function DetectorPage() {
                 </div>
               </div>
             </div>
-            <div className="group bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm transition-all hover:shadow-md hover:bg-white active:scale-95 cursor-default">
+            <div className="group bg-yellow-50/30 p-6 rounded-[2rem] border border-yellow-500/10 shadow-sm transition-all hover:shadow-md hover:bg-white active:scale-95 cursor-default">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-sm border border-emerald-100 transition-colors group-hover:bg-emerald-500 group-hover:text-white">
                   <Heart size={24} />
@@ -350,7 +350,7 @@ function DetectorPage() {
                 </div>
               </div>
             </div>
-            <div className="group bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm transition-all hover:shadow-md hover:bg-white active:scale-95 cursor-default">
+            <div className="group bg-yellow-50/30 p-6 rounded-[2rem] border border-yellow-500/10 shadow-sm transition-all hover:shadow-md hover:bg-white active:scale-95 cursor-default">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center shadow-sm border border-red-100 transition-colors group-hover:bg-red-500 group-hover:text-white">
                   <ShieldAlert size={24} />
@@ -361,7 +361,7 @@ function DetectorPage() {
                 </div>
               </div>
             </div>
-            <div className="group bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm transition-all hover:shadow-md hover:bg-white active:scale-95 cursor-default">
+            <div className="group bg-yellow-50/30 p-6 rounded-[2rem] border border-yellow-500/10 shadow-sm transition-all hover:shadow-md hover:bg-white active:scale-95 cursor-default">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center shadow-sm border border-pink-100 transition-colors group-hover:bg-pink-500 group-hover:text-white">
                   <Heart size={24} fill="currentColor" />
@@ -511,7 +511,7 @@ function DetectorPage() {
                     <button
                       onClick={handleExport}
                       disabled={filteredImages.length === 0 || isExporting}
-                      className="flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-black text-xs transition-all shadow-xl shadow-blue-100 active:scale-95"
+                      className="flex items-center justify-center gap-3 bg-yellow-500 hover:bg-yellow-600 disabled:bg-slate-200 text-slate-950 py-4 rounded-2xl font-black text-xs transition-all shadow-xl shadow-yellow-100 active:scale-95"
                     >
                       {isExporting ? <RefreshCw className="animate-spin" size={16} /> : <Download size={16} />}
                       {isExporting ? "Preparing ZIP..." : `Export ${filteredImages.length} Photos`}
