@@ -21,9 +21,7 @@ const Sidebar = ({
       <div className="p-6 border-b border-slate-100 flex flex-col gap-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="h-10 overflow-hidden">
-              <img src="/logo.png" alt="Logo" className="h-full object-contain mix-blend-multiply" />
-            </div>
+            <h2 className="text-xl font-black tracking-tighter text-slate-900 italic">Filters</h2>
           </div>
 
           <div className={cn(
@@ -147,27 +145,6 @@ const Sidebar = ({
           </div>
         </div>
 
-        <div className="space-y-4">
-          <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest">Stats</h3>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-              <p className="text-2xl font-bold text-slate-900 leading-none">{stats.total}</p>
-              <p className="text-[10px] text-slate-500 font-medium uppercase mt-1">Total Photos</p>
-            </div>
-            <div className="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
-              <p className="text-2xl font-bold text-emerald-700 leading-none">{stats.sharp}</p>
-              <p className="text-[10px] text-emerald-600 font-medium uppercase mt-1">Sharp</p>
-            </div>
-            <div className="bg-red-50 p-4 rounded-xl border border-red-100">
-              <p className="text-2xl font-bold text-red-700 leading-none">{stats.blurry}</p>
-              <p className="text-[10px] text-red-600 font-medium uppercase mt-1">Blurry</p>
-            </div>
-            <div className="bg-pink-50 p-4 rounded-xl border border-pink-100">
-              <p className="text-2xl font-bold text-pink-700 leading-none">{stats.smiling}</p>
-              <p className="text-[10px] text-pink-600 font-medium uppercase mt-1">Smiling</p>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div className="p-6 bg-slate-50 border-t border-slate-100 space-y-3">
