@@ -118,32 +118,32 @@ const Sidebar = ({
                 <div className="space-y-2">
                   <div className="flex items-center gap-3 text-blue-600">
                     <Sparkles size={24} />
-                    <span className="text-[11px] font-black uppercase tracking-[0.3em]">Our Mission</span>
+                    <span className="text-[11px] font-black uppercase tracking-[0.3em]">Project Overview</span>
                   </div>
-                  <h3 className="text-3xl font-black tracking-tighter text-slate-900">Building Id'a.</h3>
+                  <h3 className="text-3xl font-black tracking-tighter text-slate-900 uppercase italic leading-none">Building Id'a.</h3>
                 </div>
 
                 <div className="grid grid-cols-2 gap-6 pb-2">
-                  <div className="space-y-2">
+                  <div className="space-y-2 text-left">
                     <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
                       <Zap size={20} />
                     </div>
                     <h4 className="text-sm font-black text-slate-900 uppercase italic tracking-tight">Smart Curation</h4>
-                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">AI that spots blurry shots and warm smiles instantly, saving hours of sorting work.</p>
+                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">AI analysis that spots blurry shots and warm smiles instantly, saving hours of sorting work.</p>
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-2 text-left">
                     <div className="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
                       <ShieldCheck size={20} />
                     </div>
-                    <h4 className="text-sm font-black text-slate-900 uppercase italic tracking-tight">Total Privacy</h4>
-                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">Your photos never leave this browser. Analysis happens right here on your device.</p>
+                    <h4 className="text-sm font-black text-slate-900 uppercase italic tracking-tight">Privacy First</h4>
+                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">All computations run directly in your browser. No uploads, no servers, no tracking.</p>
                   </div>
                 </div>
 
-                <div className="p-6 bg-slate-50 rounded-[2rem] border border-slate-100 space-y-4">
+                <div className="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 space-y-4 text-left">
                   <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest">In simple terms...</h4>
                   <p className="text-sm text-slate-600 font-medium leading-relaxed">
-                    We built Id'a to be an AI-powered co-pilot for photographers. Sorting through thousands of photos is the most painful part of the job—Id'a does the "heavy lifting" by finding the perfect shots automatically, so you can get back to the art of shooting.
+                    Id'a is an AI-powered co-pilot that helps photographers manage large image sets without compromising privacy or speed. It handles the technical clutter so you can enjoy the creative process.
                   </p>
                 </div>
 
