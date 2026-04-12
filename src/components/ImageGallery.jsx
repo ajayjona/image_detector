@@ -82,7 +82,7 @@ const ImageCard = ({ image, onRemove, onDownload, onImageClick, thresholds }) =>
             {image.name}
           </p>
           <span className="text-[10px] text-slate-400 whitespace-nowrap">
-            {(image.size / (1024 * 1024)).toFixed(1)}MB
+            {typeof image.size === 'number' ? `${(image.size / (1024 * 1024)).toFixed(1)}MB` : 'N/A'}
           </span>
         </div>
 

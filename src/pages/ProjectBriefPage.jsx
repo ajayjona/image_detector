@@ -2,25 +2,14 @@ import React, { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import { cn } from '../utils/utils';
 import {
-    Brain, Settings, Puzzle, UserCheck, BarChart3, Binary,
-    Camera, Heart, ShieldCheck, Filter, Download, Sparkles,
-    Code2, Layers, Cpu, Database, Archive, Layout, Zap, ArrowRight,
-    Github, Twitter, Mail
+    Brain, Settings, Puzzle, Users2, BarChart3, Wrench, Rocket,
+    Camera, Heart, ShieldCheck, Filter, Download, ArrowRight,
+    Terminal, Layout, Sparkles, Database, Archive, Layers, Code2
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const ProjectBriefPage = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 1024);
-
-    const techStack = [
-        { name: "React (v19) + Vite", icon: <Code2 size={16} />, color: "text-blue-500" },
-        { name: "Tailwind CSS", icon: <Layout size={16} />, color: "text-sky-500" },
-        { name: "Framer Motion", icon: <Layers size={16} />, color: "text-pink-500" },
-        { name: "Face-api AI", icon: <Cpu size={16} />, color: "text-emerald-500" },
-        { name: "Dexie.js (IDB)", icon: <Database size={16} />, color: "text-amber-500" },
-        { name: "JSZip", icon: <Archive size={16} />, color: "text-indigo-500" },
-        { name: "Lucide Icons", icon: <Sparkles size={16} />, color: "text-yellow-500" }
-    ];
 
     return (
         <div className="flex h-screen bg-[#fafaf9] text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900 overflow-hidden relative">
@@ -30,43 +19,43 @@ const ProjectBriefPage = () => {
             />
 
             <div className="flex flex-col flex-1 min-w-0 overflow-y-auto bg-[#fafaf9] scroll-smooth">
-                {/* 🧠 Project Overview (Hero Section) */}
-                <header className="px-12 pt-32 pb-24 max-w-7xl mx-auto w-full relative">
-                    <div className="absolute top-20 left-0 w-32 h-32 bg-blue-500/10 blur-[60px] rounded-full" />
-                    <div className="relative z-10 space-y-6">
-                        <div className="flex items-center gap-3 text-blue-600 animate-in fade-in slide-in-from-left-4 duration-500">
-                            <Brain size={24} />
-                            <span className="text-xs font-black uppercase tracking-[0.4em]">Project Overview</span>
-                        </div>
-                        <h1 className="text-7xl md:text-8xl font-black tracking-tighter text-slate-900 leading-[0.8]">
-                            Id’a — <br />
-                            <span className="text-blue-600 italic">Curation Workspace.</span>
-                        </h1>
-                        <p className="text-xl text-slate-500 max-w-2xl font-medium leading-relaxed pt-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                            A modern, AI-powered platform designed to help photographers quickly sort, analyze, and deliver high-quality images. Built entirely client-side for total privacy.
-                        </p>
-                    </div>
-                </header>
+                <main className="px-12 py-24 max-w-6xl mx-auto w-full space-y-32">
 
-                <main className="px-12 pb-32 max-w-7xl mx-auto w-full space-y-32">
+                    {/* 🧠 Project Overview (Hero Section) */}
+                    <section className="space-y-8 text-center lg:text-left">
+                        <div className="flex items-center gap-3 text-slate-400 justify-center lg:justify-start">
+                            <Brain size={24} />
+                            <h2 className="text-sm font-black uppercase tracking-[0.4em]">Project Overview</h2>
+                        </div>
+                        <h1 className="text-6xl md:text-7xl font-black tracking-tighter text-slate-900 leading-[0.9]">
+                            Id’a — AI Photography <br />
+                            <span className="text-blue-600">Curation Workspace</span>
+                        </h1>
+                        <div className="max-w-3xl bg-white border border-slate-200 rounded-[2.5rem] p-10 mx-auto lg:mx-0">
+                            <p className="text-lg text-slate-600 font-medium leading-relaxed">
+                                Id’a is a modern, AI-powered photography curation platform designed to help photographers quickly sort, analyze, and deliver high-quality images. Built as a fully client-side application, it combines intelligent image analysis with a clean, distraction-free interface to create a fast, private, and professional workflow.
+                            </p>
+                        </div>
+                    </section>
 
                     {/* ⚙️ What We Built (Card Section) */}
                     <section className="space-y-12">
                         <div className="flex items-center gap-4">
-                            <Settings className="text-slate-400" />
-                            <h2 className="text-sm font-black uppercase tracking-[0.3em] text-slate-400">What We Built</h2>
+                            <Settings className="text-slate-400" size={24} />
+                            <h2 className="text-xl font-black uppercase tracking-[0.2em] text-slate-900">What We Built</h2>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {[
-                                { title: "Clinical Design", desc: "A precision-focused digital workspace with a flat, shadow-free system and 10px radius." },
-                                { title: "Fluid Imports", desc: "A collapsible dropzone and unified navigation for seamless image and dataset syncing." },
-                                { title: "Uninterrupted Stream", desc: "A continuous workspace view that eliminates intrusive popups and distracting banners." },
-                                { title: "Team Connect", desc: "Interactive project and people pages with real-time hover previews and rich member cards." },
-                                { title: "Contextual Insights", desc: "A specialized hover-card system for quick project and team insights without navigation." }
-                            ].map((item, i) => (
-                                <div key={i} className="bg-white border border-slate-200 rounded-[2rem] p-8 space-y-3 hover:border-slate-400 transition-colors">
-                                    <h3 className="font-black text-lg text-slate-900 uppercase italic tracking-tight">{item.title}</h3>
-                                    <p className="text-xs text-slate-500 font-medium leading-relaxed">{item.desc}</p>
+                                "A Command Center UI with a clean, flat design system (no shadows, consistent 10px radius)",
+                                "A collapsible dropzone for seamless image importing",
+                                "Unified navigation for loading files and sample datasets",
+                                "A continuous workspace view (no intrusive popups or banners)",
+                                "Interactive team and project pages with profile previews",
+                                "A hover-card system for quick insights without navigation"
+                            ].map((text, i) => (
+                                <div key={i} className="flex gap-4 p-8 bg-white border border-slate-100 rounded-[2rem] hover:border-blue-200 transition-colors">
+                                    <div className="w-2 h-2 rounded-full bg-blue-500 mt-2 shrink-0" />
+                                    <p className="text-slate-600 font-bold leading-relaxed">{text}</p>
                                 </div>
                             ))}
                         </div>
@@ -74,124 +63,168 @@ const ProjectBriefPage = () => {
 
                     {/* 🧩 Core Features (Card Section) */}
                     <section className="space-y-12">
-                        <div className="flex items-center gap-4">
-                            <Puzzle className="text-slate-400" />
-                            <h2 className="text-sm font-black uppercase tracking-[0.3em] text-slate-400">Core Features</h2>
+                        <div className="flex items-center gap-4 border-b border-slate-100 pb-8">
+                            <Puzzle className="text-slate-400" size={24} />
+                            <h2 className="text-xl font-black uppercase tracking-[0.2em] text-slate-900">Core Features</h2>
                         </div>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                            <div className="bg-slate-900 rounded-[3rem] p-12 text-white relative overflow-hidden group">
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px]" />
-                                <div className="relative z-10 space-y-6">
-                                    <Camera className="text-emerald-400" size={32} />
-                                    <h3 className="text-3xl font-black tracking-tight italic uppercase">AI Sharpness Detection</h3>
-                                    <p className="text-slate-400 font-medium leading-relaxed">
-                                        Each image is analyzed locally to determine clarity and focal accuracy, helping identify technically strong shots without manual pixel-peeping.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="bg-slate-900 rounded-[3rem] p-12 text-white relative overflow-hidden group">
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-pink-500/10 rounded-full blur-[80px]" />
-                                <div className="relative z-10 space-y-6">
-                                    <Heart className="text-pink-400" size={32} />
-                                    <h3 className="text-3xl font-black tracking-tight italic uppercase">Emotion Recognition</h3>
-                                    <p className="text-slate-400 font-medium leading-relaxed">
-                                        Advanced facial analysis highlights images with natural smiles and positive emotions, ensuring your selections resonate emotionally.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {[
-                                { icon: <ShieldCheck className="text-blue-500" />, t: "Privacy First", d: "Computations run entirely in the browser—no uploads, no servers, no tracking." },
-                                { icon: <Filter className="text-indigo-500" />, t: "Smart Filtering", d: "Dynamically adjust thresholds for 'Perfect' shots vs 'Rejects' in real-time." },
-                                { icon: <Download className="text-emerald-500" />, t: "Bulk Export", d: "Instantly package and download your selections as a single ZIP archive." }
-                            ].map((item, i) => (
-                                <div key={i} className="bg-white border border-slate-200 rounded-[2.5rem] p-10 space-y-4">
-                                    <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center border border-slate-100">{item.icon}</div>
-                                    <h4 className="font-black text-lg tracking-tight uppercase">{item.t}</h4>
-                                    <p className="text-xs text-slate-500 font-medium leading-relaxed">{item.d}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-
-                    {/* 📊 Insights & Feedback (Section) */}
-                    <section className="bg-white border border-slate-200 rounded-[4rem] p-16 relative overflow-hidden">
-                        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-yellow-400/5 rounded-full blur-[100px]" />
-                        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                            <div className="space-y-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div className="bg-white border border-slate-200 rounded-[3rem] p-10 space-y-6">
                                 <div className="flex items-center gap-4">
-                                    <BarChart3 className="text-blue-600" />
-                                    <h2 className="text-sm font-black uppercase tracking-[0.3em] text-blue-600">Insights & Feedback</h2>
+                                    <Camera className="text-blue-600" size={28} />
+                                    <h3 className="text-xl font-black">AI Sharpness Detection</h3>
                                 </div>
-                                <h3 className="text-4xl font-black tracking-tighter leading-tight">
-                                    A streamlined Stats Board <br />
-                                    for instant visual feedback.
-                                </h3>
-                                <p className="text-slate-500 font-medium leading-relaxed">
-                                    Color-coded metrics make scanning processed data fast and intuitive. Monitor total images, sharp vs. blurry balances, and emotion-based classifications at a glance.
+                                <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                                    Each image is analyzed to determine clarity and focal accuracy, helping identify technically strong shots.
                                 </p>
                             </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="p-6 bg-yellow-50 rounded-3xl border border-yellow-100 flex flex-col gap-2">
-                                    <span className="text-[10px] font-black uppercase text-yellow-600">Total processed</span>
-                                    <div className="h-2 w-12 bg-yellow-200 rounded-full" />
+                            <div className="bg-white border border-slate-200 rounded-[3rem] p-10 space-y-6">
+                                <div className="flex items-center gap-4">
+                                    <Heart className="text-pink-500" size={28} />
+                                    <h3 className="text-xl font-black">Emotion Recognition</h3>
                                 </div>
-                                <div className="p-6 bg-emerald-50 rounded-3xl border border-emerald-100 flex flex-col gap-2">
-                                    <span className="text-[10px] font-black uppercase text-emerald-600">Sharp Detection</span>
-                                    <div className="h-2 w-16 bg-emerald-200 rounded-full" />
+                                <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                                    The system detects facial expressions and highlights images with natural smiles and positive emotions.
+                                </p>
+                            </div>
+                            <div className="bg-white border border-slate-200 rounded-[3rem] p-10 space-y-6">
+                                <div className="flex items-center gap-4">
+                                    <ShieldCheck className="text-emerald-500" size={28} />
+                                    <h3 className="text-xl font-black">Privacy-First Processing</h3>
                                 </div>
-                                <div className="p-6 bg-red-50 rounded-3xl border border-red-100 flex flex-col gap-2">
-                                    <span className="text-[10px] font-black uppercase text-red-600">Blurry Alert</span>
-                                    <div className="h-2 w-8 bg-red-200 rounded-full" />
+                                <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                                    All computations run directly in the browser — no uploads, no servers, no data tracking.
+                                </p>
+                            </div>
+                            <div className="bg-white border border-slate-200 rounded-[3rem] p-10 space-y-6">
+                                <div className="flex items-center gap-4">
+                                    <Filter className="text-indigo-500" size={28} />
+                                    <h3 className="text-xl font-black">Smart Filtering</h3>
                                 </div>
-                                <div className="p-6 bg-pink-50 rounded-3xl border border-pink-100 flex flex-col gap-2">
-                                    <span className="text-[10px] font-black uppercase text-pink-600">Happy Moments</span>
-                                    <div className="h-2 w-20 bg-pink-200 rounded-full" />
+                                <div className="space-y-2">
+                                    <p className="text-sm text-slate-500 font-medium leading-relaxed">Users can dynamically adjust thresholds to filter:</p>
+                                    <ul className="text-xs font-black text-slate-400 uppercase space-y-1 pl-4 border-l-2 border-indigo-100">
+                                        <li>• “Perfect” shots</li>
+                                        <li>• Rejected or low-quality images</li>
+                                    </ul>
                                 </div>
+                            </div>
+                            <div className="bg-white border border-slate-200 rounded-[3rem] p-10 space-y-6">
+                                <div className="flex items-center gap-4">
+                                    <Download className="text-yellow-600" size={28} />
+                                    <h3 className="text-xl font-black">Bulk Export</h3>
+                                </div>
+                                <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                                    Selected images can be instantly packaged and downloaded as a ZIP file for delivery.
+                                </p>
                             </div>
                         </div>
                     </section>
 
-                    {/* 🛠️ Technical Stack (Section) */}
+                    {/* 🧑‍🤝‍🧑 Collaboration & Experience (Card Section) */}
                     <section className="space-y-12">
                         <div className="flex items-center gap-4">
-                            <Binary className="text-slate-400" />
-                            <h2 className="text-sm font-black uppercase tracking-[0.3em] text-slate-400">Technical Stack</h2>
+                            <Users2 className="text-slate-400" size={24} />
+                            <h2 className="text-xl font-black uppercase tracking-[0.2em] text-slate-900">Collaboration & Experience</h2>
                         </div>
-                        <div className="bg-slate-50 rounded-[3rem] p-12 border border-slate-100 space-y-10">
-                            <p className="text-lg text-slate-600 max-w-3xl font-medium leading-relaxed">
-                                Id’a is built using a modern, high-performance frontend stack designed for fluid interactions and robust client-side AI processing.
-                            </p>
-                            <div className="flex flex-wrap gap-4">
-                                {techStack.map((tech) => (
-                                    <div key={tech.name} className="flex items-center gap-3 px-5 py-3 bg-white border border-slate-200 rounded-2xl shadow-sm hover:scale-105 transition-transform">
-                                        <div className={tech.color}>{tech.icon}</div>
-                                        <span className="text-xs font-black uppercase tracking-widest text-slate-700">{tech.name}</span>
+                        <div className="bg-slate-900 rounded-[4rem] p-16 text-white relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px]" />
+                            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12">
+                                {[
+                                    "Dedicated People and Project Brief pages",
+                                    "Integrated team identity with photos and branding",
+                                    "Real-time hover previews for members and project details",
+                                    "Designed to feel like a professional creative studio environment"
+                                ].map((text, i) => (
+                                    <div key={i} className="flex items-center gap-4 p-6 bg-white/5 border border-white/10 rounded-3xl">
+                                        <div className="w-2 h-2 rounded-full bg-blue-400 shrink-0" />
+                                        <p className="text-sm font-medium text-slate-300">{text}</p>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </section>
 
-                    {/* 🚀 Final Outcome (Closing) */}
-                    <footer className="pt-24 pb-12 border-t border-slate-100">
-                        <div className="flex flex-col lg:flex-row gap-12 items-start justify-between">
-                            <div className="space-y-6 max-w-2xl">
-                                <h3 className="text-4xl font-black tracking-tight">The Result.</h3>
-                                <p className="text-lg text-slate-500 font-medium leading-relaxed">
-                                    A fully functional, AI-assisted curation tool that runs entirely in the browser. It balances performance, privacy, and design clarity, giving photographers a powerful way to manage large image sets without compromising speed or user experience.
+                    {/* 📊 Insights & Feedback (Card Section) */}
+                    <section className="space-y-12">
+                        <div className="flex items-center gap-4 border-b border-slate-100 pb-8">
+                            <BarChart3 className="text-slate-400" size={24} />
+                            <h2 className="text-xl font-black uppercase tracking-[0.2em] text-slate-900">Insights & Feedback</h2>
+                        </div>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                            <div className="space-y-6">
+                                <p className="text-lg text-slate-600 font-medium leading-relaxed">
+                                    A streamlined Stats Board provides instant visual feedback. Color-coded metrics make scanning fast and intuitive.
                                 </p>
+                                <ul className="space-y-4">
+                                    {[
+                                        "Total images processed",
+                                        "Sharp vs. blurry detection",
+                                        "Emotion-based classification (“Happy” images)"
+                                    ].map((text, i) => (
+                                        <li key={i} className="flex items-center gap-3 text-slate-500 font-black uppercase text-[11px] tracking-widest">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                                            {text}
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
+                            <div className="flex flex-col gap-4 bg-slate-50 p-10 rounded-[3rem] border border-slate-100">
+                                <div className="flex justify-between items-center p-4 bg-white rounded-2xl border border-yellow-100"><span className="text-xs font-black uppercase text-yellow-600">Total</span><div className="h-2 w-16 bg-yellow-400 rounded-full" /></div>
+                                <div className="flex justify-between items-center p-4 bg-white rounded-2xl border border-emerald-100"><span className="text-xs font-black uppercase text-emerald-600">Sharp</span><div className="h-2 w-24 bg-emerald-400 rounded-full" /></div>
+                                <div className="flex justify-between items-center p-4 bg-white rounded-2xl border-red-100"><span className="text-xs font-black uppercase text-red-600">Blurry</span><div className="h-2 w-12 bg-red-400 rounded-full" /></div>
+                                <div className="flex justify-between items-center p-4 bg-white rounded-2xl border-pink-100"><span className="text-xs font-black uppercase text-pink-600">Happy</span><div className="h-2 w-20 bg-pink-400 rounded-full" /></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* 🛠️ Technical Stack (Paragraph + Mini Cards) */}
+                    <section className="space-y-12">
+                        <div className="flex items-center gap-4">
+                            <Wrench className="text-slate-400" size={24} />
+                            <h2 className="text-xl font-black uppercase tracking-[0.2em] text-slate-900">Technical Stack</h2>
+                        </div>
+                        <div className="space-y-8">
+                            <p className="text-lg text-slate-600 font-medium leading-relaxed">
+                                Id’a is built using a modern, high-performance frontend stack:
+                            </p>
+                            <div className="flex flex-wrap gap-4">
+                                {[
+                                    { t: "Frontend: React (v19) + Vite", i: <Code2 size={16} /> },
+                                    { t: "Styling: Tailwind CSS", i: <Layout size={16} /> },
+                                    { t: "Animations: Framer Motion", i: <Layers size={16} /> },
+                                    { t: "AI Engine: face-api", i: <Sparkles size={16} /> },
+                                    { t: "Storage: Dexie.js (IDB)", i: <Database size={16} /> },
+                                    { t: "Exporting: JSZip", i: <Archive size={16} /> },
+                                    { t: "Icons: Lucide React", i: <Terminal size={16} /> }
+                                ].map((item, i) => (
+                                    <div key={i} className="flex items-center gap-3 px-6 py-4 bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-blue-500 transition-all">
+                                        <div className="text-blue-500">{item.i}</div>
+                                        <span className="text-xs font-black uppercase tracking-widest">{item.t}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* 🚀 Final Outcome (Closing Paragraph) */}
+                    <section className="pt-24 border-t border-slate-100 space-y-8">
+                        <div className="flex items-center gap-3 text-slate-400">
+                            <Rocket size={24} />
+                            <h2 className="text-sm font-black uppercase tracking-[0.4em]">Final Outcome</h2>
+                        </div>
+                        <div className="bg-blue-600 text-white p-16 rounded-[4rem] flex flex-col lg:flex-row gap-12 items-center justify-between">
+                            <p className="text-2xl font-bold leading-relaxed max-w-3xl">
+                                The result is a fully functional, AI-assisted curation tool that runs entirely in the browser. It balances performance, privacy, and design clarity, giving photographers a powerful way to manage large image sets without compromising speed or user experience.
+                            </p>
                             <button
                                 onClick={() => window.location.href = '/app'}
-                                className="group px-10 py-6 bg-slate-900 text-white rounded-[2rem] font-black text-lg flex items-center gap-4 hover:scale-105 active:scale-95 transition-all w-full lg:w-auto justify-center"
+                                className="px-10 py-6 bg-white text-blue-600 rounded-[2rem] font-black text-lg flex items-center gap-4 hover:scale-105 active:scale-95 transition-all w-full lg:w-auto justify-center"
                             >
                                 Launch Workspace
-                                <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+                                <ArrowRight size={20} />
                             </button>
                         </div>
-                    </footer>
+                    </section>
                 </main>
             </div>
         </div>

@@ -198,16 +198,7 @@ const LandingPage = () => {
                             </div>
                         </div>
 
-                        {/* Manifesto Line */}
-                        <div className="relative py-20 border-y border-white/5">
-                            <div className="absolute inset-0 bg-yellow-500/5 blur-3xl rounded-full" />
-                            <div className="relative text-center max-w-3xl mx-auto space-y-6">
-                                <h3 className="text-2xl font-black uppercase tracking-[0.2em] text-white/40">The Privacy Manifesto</h3>
-                                <p className="text-3xl md:text-4xl font-black leading-tight">
-                                    Your art belongs to you. <span className="text-yellow-500">Always.</span> No uploads, no training data, no compromises.
-                                </p>
-                            </div>
-                        </div>
+
                     </motion.div>
                 </div>
             </section>
