@@ -9,17 +9,19 @@ const PeoplePage = () => {
     const members = [
         {
             name: "Aiita Lyslay Osoa",
-            role: "Project Founder & Creative Lead",
-            bio: "Visionary behind Id'a. Passionate about professional photography curation and the intersection of AI with creative workflows. Aiita leads the design language and core user experience of the platform.",
+            role: "Project Member",
+            bio: "Core member of the Id'a development team, focused on building a private and high-performance photography curation experience.",
             avatar: "AL",
+            image: "/lyslay.jpeg",
             color: "from-yellow-400 to-orange-500",
             socials: { github: "#", twitter: "#", linkedin: "#" }
         },
         {
             name: "Oguzu Stephen",
-            role: "Lead AI Engineer & Technical Architect",
-            bio: "Technical powerhouse driving the computer vision capabilities of Id'a. Stephen specializes in on-device AI models and ensuring high-performance image analysis directly in your browser.",
+            role: "Project Member",
+            bio: "Core member of the Id'a development team, focused on building a private and high-performance photography curation experience.",
             avatar: "OS",
+            image: "/Oguzu.jpeg",
             color: "from-blue-500 to-indigo-600",
             socials: { github: "#", twitter: "#", linkedin: "#" }
         }
@@ -53,7 +55,7 @@ const PeoplePage = () => {
                         {members.map((member, index) => (
                             <div
                                 key={member.name}
-                                className="group relative bg-white border border-slate-200 rounded-[3rem] p-10 shadow-2xl shadow-slate-200/50 hover:shadow-slate-300/50 transition-all duration-500 overflow-hidden animate-slide-up"
+                                className="group relative bg-white border border-slate-200 rounded-[3rem] p-10 transition-all duration-500 overflow-hidden animate-slide-up"
                                 style={{ animationDelay: `${index * 200}ms` }}
                             >
                                 {/* Decorative background element */}
@@ -62,10 +64,10 @@ const PeoplePage = () => {
                                 <div className="relative z-10 space-y-8">
                                     <div className="flex items-start justify-between">
                                         <div className={cn(
-                                            "w-24 h-24 rounded-3xl flex items-center justify-center text-3xl font-black text-white shadow-xl rotate-[-4deg] group-hover:rotate-0 transition-transform duration-500 bg-gradient-to-br",
+                                            "w-24 h-24 rounded-3xl overflow-hidden rotate-[-4deg] group-hover:rotate-0 transition-transform duration-500 bg-gradient-to-br",
                                             member.color
                                         )}>
-                                            {member.avatar}
+                                            <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
                                         </div>
                                         <div className="flex gap-3">
                                             <button className="w-10 h-10 rounded-full border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 hover:bg-slate-50 transition-all">
@@ -107,7 +109,7 @@ const PeoplePage = () => {
                                 <h3 className="text-3xl font-black tracking-tight">Interested in collaborating?</h3>
                                 <p className="text-slate-400 font-medium max-w-md">We are always looking for ways to expand Id'a's capabilities and reach specialized photography workflows.</p>
                             </div>
-                            <button className="bg-white text-slate-900 px-10 py-5 rounded-3xl font-black text-sm hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-blue-500/10 flex items-center gap-3 whitespace-nowrap">
+                            <button className="bg-white text-slate-900 px-10 py-5 rounded-3xl font-black text-sm hover:scale-105 active:scale-95 transition-all flex items-center gap-3 whitespace-nowrap">
                                 <Sparkles size={18} className="text-blue-600" />
                                 Contact the Team
                             </button>

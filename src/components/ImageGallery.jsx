@@ -17,8 +17,8 @@ const ImageCard = ({ image, onRemove, onDownload, onImageClick, thresholds }) =>
       exit={{ opacity: 0, scale: 0.9 }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className={cn(
-        "group relative bg-white/80 backdrop-blur-md rounded-2xl shadow-sm border transition-all duration-300 overflow-hidden",
-        isPerfect ? "border-emerald-200 shadow-emerald-100 shadow-xl ring-1 ring-emerald-500/20" : "border-slate-200",
+        "group relative bg-white/80 backdrop-blur-md rounded-2xl border transition-all duration-300 overflow-hidden",
+        isPerfect ? "border-emerald-200 ring-1 ring-emerald-500/20" : "border-slate-200",
         isReject ? "opacity-90 grayscale-[0.2]" : ""
       )}
     >
@@ -52,17 +52,17 @@ const ImageCard = ({ image, onRemove, onDownload, onImageClick, thresholds }) =>
         {image.status === 'completed' && (
           <div className="absolute top-2 left-2 flex gap-1.5 z-10">
             {isPerfect && (
-              <div className="bg-emerald-500 text-white p-1.5 rounded-full shadow-lg shadow-emerald-500/40">
+              <div className="bg-emerald-500 text-white p-1.5 rounded-full">
                 <Check size={14} strokeWidth={4} />
               </div>
             )}
             {!isPerfect && isSmiling && (
-              <div className="bg-pink-500 text-white p-1.5 rounded-full shadow-lg shadow-pink-500/40">
+              <div className="bg-pink-500 text-white p-1.5 rounded-full">
                 <Heart size={14} fill="currentColor" />
               </div>
             )}
             {isBlurry && (
-              <div className="bg-amber-500 text-white p-1.5 rounded-full shadow-lg shadow-amber-500/40">
+              <div className="bg-amber-500 text-white p-1.5 rounded-full">
                 <ShieldAlert size={14} strokeWidth={3} />
               </div>
             )}

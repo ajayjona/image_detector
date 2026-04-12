@@ -14,25 +14,25 @@ const ConfirmationModal = ({ isOpen, title, message, onConfirm, onCancel, type =
     const config = {
         danger: {
             icon: <Trash2 className="text-red-500" size={24} />,
-            btnClass: "bg-red-500 hover:bg-red-600 shadow-red-100",
+            btnClass: "bg-red-500 hover:bg-red-600",
             accent: "border-red-100 bg-red-50/30",
             confirmLabel: "Yes, remove"
         },
         download: {
             icon: <Download className="text-blue-500" size={24} />,
-            btnClass: "bg-blue-600 hover:bg-blue-700 shadow-blue-100",
+            btnClass: "bg-blue-600 hover:bg-blue-700",
             accent: "border-blue-100 bg-blue-50/30",
             confirmLabel: "Download ZIP"
         },
         warning: {
             icon: <AlertCircle className="text-amber-500" size={24} />,
-            btnClass: "bg-amber-500 hover:bg-amber-600 shadow-amber-100",
+            btnClass: "bg-amber-500 hover:bg-amber-600",
             accent: "border-amber-100 bg-amber-50/30",
             confirmLabel: "Yes, continue"
         }
     }[type] || {
         icon: <AlertCircle className="text-amber-500" size={24} />,
-        btnClass: "bg-amber-500 hover:bg-amber-600 shadow-amber-100",
+        btnClass: "bg-amber-500 hover:bg-amber-600",
         accent: "border-amber-100 bg-amber-50/30",
         confirmLabel: "Yes, continue"
     };
@@ -54,7 +54,7 @@ const ConfirmationModal = ({ isOpen, title, message, onConfirm, onCancel, type =
                     initial={{ scale: 0.95, opacity: 0, y: 10 }}
                     animate={{ scale: 1, opacity: 1, y: 0 }}
                     exit={{ scale: 0.95, opacity: 0, y: 10 }}
-                    className="relative w-full max-w-sm bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-200"
+                    className="relative w-full max-w-sm bg-white rounded-[2.5rem] overflow-hidden border border-slate-200"
                 >
                     <div className="p-8 space-y-6">
                         <div className="flex flex-col items-center text-center space-y-4">
@@ -85,7 +85,7 @@ const ConfirmationModal = ({ isOpen, title, message, onConfirm, onCancel, type =
                         <div className="flex flex-col gap-2">
                             <button
                                 onClick={() => { onConfirm(inputValue); onCancel(); }}
-                                className={`w-full py-4 rounded-2xl font-black text-white transition-all shadow-lg active:scale-95 ${config.btnClass}`}
+                                className={`w-full py-4 rounded-2xl font-black text-white transition-all active:scale-95 ${config.btnClass}`}
                             >
                                 {config.confirmLabel}
                             </button>

@@ -32,15 +32,15 @@ const ImageDropzone = ({ onImagesSelected, className }) => {
       {...getRootProps()}
       className={cn(
         "relative group cursor-pointer rounded-xl border-2 border-dashed transition-all duration-200 ease-in-out p-12 text-center",
-        isDragActive 
-          ? "border-blue-500 bg-blue-50/50" 
+        isDragActive
+          ? "border-blue-500 bg-blue-50/50"
           : "border-slate-300 hover:border-slate-400 bg-slate-50",
         className
       )}
     >
       <input {...getInputProps()} />
       <div className="flex flex-col items-center justify-center space-y-4">
-        <div className="p-4 bg-white rounded-full shadow-sm border border-slate-100 group-hover:scale-110 transition-transform duration-200">
+        <div className="p-4 bg-white rounded-full border border-slate-100 group-hover:scale-110 transition-transform duration-200">
           <Upload className={cn(
             "w-8 h-8",
             isDragActive ? "text-blue-500" : "text-slate-400"

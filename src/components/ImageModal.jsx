@@ -70,7 +70,7 @@ const ImageModal = ({ image, onClose, onDownload, onRemove, onNext, onPrev }) =>
                         <img
                             src={image.preview}
                             alt={image.name}
-                            className="max-w-full max-h-[80vh] object-contain rounded-3xl shadow-2xl border border-white/20"
+                            className="max-w-full max-h-[80vh] object-contain rounded-3xl border border-white/20"
                         />
                     </div>
 
@@ -78,7 +78,7 @@ const ImageModal = ({ image, onClose, onDownload, onRemove, onNext, onPrev }) =>
                     <motion.div
                         initial={{ x: 20, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
-                        className="w-80 bg-white/10 backdrop-blur-2xl rounded-[2.5rem] border border-white/20 p-8 space-y-8 shadow-2xl"
+                        className="w-80 bg-white/10 backdrop-blur-2xl rounded-[2.5rem] border border-white/20 p-8 space-y-8"
                     >
                         <div className="space-y-1">
                             <h3 className="text-white font-black text-2xl tracking-tight truncate" title={image.name}>
@@ -140,7 +140,7 @@ const ImageModal = ({ image, onClose, onDownload, onRemove, onNext, onPrev }) =>
                         <div className="pt-4 flex flex-col gap-3">
                             <button
                                 onClick={() => onDownload(image)}
-                                className="w-full bg-white text-slate-900 font-black py-4 rounded-2xl flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-white/5"
+                                className="w-full bg-white text-slate-900 font-black py-4 rounded-2xl flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all"
                             >
                                 <Download size={18} />
                                 Download Original

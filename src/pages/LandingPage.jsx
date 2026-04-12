@@ -63,7 +63,7 @@ const LandingPage = () => {
                         >
                             <Link
                                 to="/app"
-                                className="group relative w-full sm:w-auto px-10 py-5 bg-white text-slate-950 rounded-[2rem] font-black text-xl flex items-center justify-center gap-3 hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-white/10"
+                                className="group relative w-full sm:w-auto px-10 py-5 bg-white text-slate-950 rounded-[2rem] font-black text-xl flex items-center justify-center gap-3 hover:scale-105 active:scale-95 transition-all"
                             >
                                 Launch Detector
                                 <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
@@ -101,7 +101,7 @@ const LandingPage = () => {
                         className="relative hidden lg:block"
                     >
                         {/* Visual Teaser */}
-                        <div className="relative aspect-square rounded-[4rem] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-2xl shadow-2xl group">
+                        <div className="relative aspect-square rounded-[4rem] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-2xl group">
                             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-transparent opacity-50" />
                             <img
                                 src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1000&q=80"
